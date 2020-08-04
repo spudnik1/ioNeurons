@@ -12,7 +12,7 @@ const char ID_reg[1] = {0x75};
 char data[1];
 
 int main() {
-
+ // example
     // Set Clock Frequency
     i2c.frequency(400000); 
 
