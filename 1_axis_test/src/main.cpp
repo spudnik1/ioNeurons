@@ -1,14 +1,24 @@
 #include "mbed.h"
 
-void readRegister(int address, const char* reg, char* data);
+#define MPU_ADDRESS 0x68
+
+#define WHO_AM_I    0x75
+#define PWR_MGMT_1  0x6B
+
+#define MPU_ID 0x71
+
+#define BLINKING_RATE 100
+
+void readByte(int address, char subaddress, char* data);
+void writeByte(int address, char subaddress, char* data);
 
 I2C i2c(PB_11, PB_10); // Data, Clock
 
-DigitalOut led1(PD_4);
-DigitalOut led2(PD_5);
+DigitalOut ledB(PD_4);
+DigitalOut ledG(PD_5);
 
-int address = 0x68;
-const char ID_reg[1] = {0x75};
+//int address = 0x68;
+//const char ID_reg[1] = {0x75};
 char data[1];
 
 int main() {
@@ -16,23 +26,40 @@ int main() {
     // Set Clock Frequency
     i2c.frequency(400000); 
 
-    readByte(address, ID_reg, data);
+    // Should scan the I2C line for devices
+    
+    // Read the chip ID from the WHO_AM_I register
+    readByte(MPU_ADDRESS,WHO_AM_I, data);
 
-    if (data[0] == 0x71){
-        led1.write(true); // blue
+    if (data[0] == MPU_ID){
+        for(int i = 0; i < 6; i++){
+            ledB.write(!ledB.read()); 
+            thread_sleep_for(BLINKING_RATE);   
+        }
     }
     else{
-        led2.write(true); // green
+        ledG.write(1);
     }
+
 }
-void readByte(int address, const char* reg, char* data){
-    i2c.write(address<<1,reg,1,true);
+void readByte(int address, char subaddress, char* data){
+    //char subaddress[1] = {reg}; // i2c.write expects a char pointer
+    i2c.write(address<<1,&subaddress,1,true);
     i2c.read(address<<1,data,1,false);
     return;
 }
 
-void writeByte(int address, const char* reg, char data){
-    i2c.write(address<<1,reg,1,false);
+void writeByte(int address, char subaddress, int data){
+    i2c.write(address<<1,&subaddress,1,true);
     i2c.write(data);
     return;
+}
+
+void calibration(){
+    
+    // reset device
+    writeByte(MPU_ADDRESS,PWR_MGMT_1,0x80);
+    
+
+
 }
