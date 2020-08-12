@@ -4,7 +4,7 @@
 #define ADC123_IN11 PC_1 // FFC pin 15
 #define TORQUE_CONSTANT 1.81 // mNm/A
 #define BEMF_CONSTANT 0.19 // mV/min^-1
-#define ENCODER_REVOLUTION 1 // pulse/rev
+#define ENCODER_REVOLUTION 16 // pulse/rev
 #define WINDING_RESISTANCE 3.14 // ohms (THIS IS PHASE-PHASE)
 #define DRIVER_PWMPERIOD 13 //us
 #define PI 3.1415926535897
