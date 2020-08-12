@@ -21,7 +21,6 @@ float bEMF=0;
 float current;
 float voltage=0;
 float error;
-float dError;
 float output;
 int P;
 int I;
@@ -30,6 +29,7 @@ int Torque;
 int pulseCount = 0;
 
 void encoder_count();
+float getSpeed();
 
 int main() {
 
@@ -38,14 +38,11 @@ int main() {
     encoder.rise(&encoder_count);
 
 
-  // Initial Output
-
-  
-
   while(1){
     
     // Start Control System Timer
-    
+    Control_Timer.reset();
+    Control_Timer.start();
     // Get Torque Setpoint (mNm)
       torqueSP = potentiometer.read();
     
@@ -55,15 +52,17 @@ int main() {
     // Get current
       speed = getSpeed();
       bEMF = (BEMF_CONSTANT/speed)/1000;
-      current = (voltage-bEMF)/WINDING_RESISTANCE;
+      current = (voltage-2*bEMF)/(2*WINDING_RESISTANCE);
 
     // Get Error
-      dError = (currentSP-current)-error;
-      error = error+dError;
+      error = currentSP-current;
 
     // Controller
       // Stop Control System Timer
-      output = P*error + D*0; //replace 0 with dError / control system timer value
+      Control_Timer.stop();
+      
+      // Determine controller outputs
+      output = P*error; //replace 0 with dError / control system timer value
 
     // Send controller output to drive
     pwm.write(output);
@@ -75,7 +74,7 @@ void encoder_count(){
 }
 
 float getSpeed(){
-  float speed;
+  int status = 0;
   Speed_Timer.reset();
   Speed_Timer.start();
   // Determine time for 1 revolution
@@ -83,22 +82,18 @@ float getSpeed(){
     while(1){
       if(pulseCount >= ENCODER_REVOLUTION){
         Speed_Timer.stop();
-        speed = (1.0f/Speed_Timer.read_us())*60000000;  // rpm 
+        status = 1;
         break;
       }
       if(Speed_Timer.read() > 1){
-        Speed_Timer.stop();
-        Speed_Timer.reset();
-        speed = 0;
         break;
       }
     }
   // Calculate Speed and output
-    if(Speed_Timer.read_us() > 0){
-      speed = (1.0f/Speed_Timer.read_us())*60000000;
+    if(status == 1){
+      return((1.0f/Speed_Timer.read_us())*60000000); // rpm 
     }
     else{
-      speed = 0;
+      return(0);
     }
-    return(speed);
 }
