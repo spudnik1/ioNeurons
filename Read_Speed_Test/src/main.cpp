@@ -1,8 +1,6 @@
 #include <mbed.h>
 
-#define ENCODER_REVOLUTION 16 // pulse/rev
-
-
+#define ENCODER_REVOLUTION 8 // pulse/rev
 
 volatile int pulseCount = 0;
 volatile int encoderInit = 0;
@@ -16,7 +14,6 @@ Timer Speed_Timer;
 
 void encoder_count();
 float getSpeed();
-
 
 int main() {
 
@@ -32,8 +29,7 @@ int main() {
 }
 
 void encoder_count(){
-  ledB.write(!ledB.read());
-  encoderpulseCount++;
+  pulseCount++;
   encoderInit = 1;
 }
 
@@ -46,14 +42,13 @@ float getSpeed(){
   // Wait for the beginning of a pulse
   while(!encoderInit);
   
-
   // Start the timer and initialize count
   Speed_Timer.start();
   pulseCount = 0;
   
   // Wait until one revolution has passed
   while(pulseCount < ENCODER_REVOLUTION){
-    // Timeout if the motor is going too slow
+    // Timeout if the motor is going less than 1 rps
     if(Speed_Timer.read() > 1){
       timeout_flag = 1;
       break;
@@ -68,14 +63,8 @@ float getSpeed(){
     return(0);
   }
   
-  // Determine Speed
+  // Determine and return speed (rpm)
   else{
-    return((1.0f/Speed_Timer.read_us())*60000000); // rpm 
+    return((1.0f/Speed_Timer.read_us())*60000000);
   }
-    if(pulseCount >= ENCODER_REVOLUTION){
-      
-      status = 1; 
-      break;
-    }
-
-  }
+}
