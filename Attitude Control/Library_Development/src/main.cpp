@@ -1,12 +1,10 @@
+// Used to test functionality of the motor library
 #include <mbed.h>
-#include <motorlibrary.h>
+#include <RXNWheel.h>
 
-DigitalOut led(PD_5);
+DigitalOut led(PD_4);
 
 int main(){
-  test_function();
-  if (test_variable == 1){
-    led.write(1);
-  }
+
 }
 
