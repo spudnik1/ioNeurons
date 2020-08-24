@@ -4,7 +4,22 @@
 
 DigitalOut led(PD_4);
 
-int main(){
+Motor motor(PE_2);
 
+void function();
+
+int main(){
+    myMotor = &motor;
+    while(1){
+        if(motor.getSpeed()>=7000){
+            led.write(1);
+        }
+        else{
+            led.write(0);
+        }
+    }
 }
+
+
+
 
