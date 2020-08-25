@@ -1,16 +1,19 @@
 #include <mbed.h>
 #include <RXNWheel.h>
 
-// Class constructor and encoder initialization 
+// Class constructor 
 Motor::Motor(PinName pin) : encoder{pin}{
-    encoder.rise(&Pulse_Count_Wrapper);
+    // encoder.rise(Pulse_Count_Wrapper);
+    encoder.rise(callback(this, &Motor::Pulse_Count));
 }
 
+// Interrupt function
 void Motor::Pulse_Count(){
-  encoderCount++;
-  encoderInit = 1;
+    encoderCount++;
+    encoderInit = 1;
 }
 
+// Get the speed of the motor
 float Motor::getSpeed(){
     
     // Initialization
@@ -29,7 +32,7 @@ float Motor::getSpeed(){
     while(encoderCount < ENCODER_REVOLUTION){
         // Timeout if the motor is going less than 1 rps
         if(speedTimer.read() > 1){
-        timeout_flag = 1;
+            timeout_flag = 1;
         break;
         }
     }
@@ -46,11 +49,3 @@ float Motor::getSpeed(){
         return((1.0f/speedTimer.read_us())*60000000);
     }
 }
-
-Motor * myMotor;
-
-void Pulse_Count_Wrapper()
-{
-  myMotor->Pulse_Count();
-}
-
