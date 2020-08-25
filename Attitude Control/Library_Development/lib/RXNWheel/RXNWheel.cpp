@@ -3,7 +3,6 @@
 
 // Class constructor 
 Motor::Motor(PinName pin) : encoder{pin}{
-    // encoder.rise(Pulse_Count_Wrapper);
     encoder.rise(callback(this, &Motor::Pulse_Count));
 }
 
