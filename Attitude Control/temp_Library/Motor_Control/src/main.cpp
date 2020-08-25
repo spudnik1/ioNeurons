@@ -37,7 +37,6 @@ int main() {
     pwm.period_us(DRIVER_PWMPERIOD); 
     encoder.rise(&encoder_count);
 
-
   while(1){
     
     // Start Control System Timer
