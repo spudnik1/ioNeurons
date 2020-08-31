@@ -49,6 +49,12 @@ float Motor::getSpeed(){
     }
 }
 
+float Motor::setVoltage(float voltage){
+    float dC;
+    dC = voltage;
+    pwm.write(dC);
+}
+
 // Get the current draw of the motor 
 // float Motor::getCurrent(){
 //     // Find back EMF

@@ -3,11 +3,12 @@
 
 #include <mbed.h>
 
-#define BEMF_CONSTANT 0.19 // mV/(rad/min)
+#define BEMF_CONSTANT 0.19 // mV/(rev/min)
 #define ENCODER_REVOLUTION 8 // pulse/rev
 #define TORQUE_CONSTANT 1.81 // mNm/A
 #define WINDING_RESISTANCE 3.14 // ohms (THIS IS PHASE-PHASE)
 #define DRIVER_PWMPERIOD 13 // us
+#define INPUT_VOLTAGE 15.00 // V
 
 #ifndef PI
 #define PI 3.14159265359
@@ -25,7 +26,9 @@ class Motor {
         Motor(PinName encoder_pin, PinName pwm_pin);
         void Pulse_Count();
         float getSpeed();
+        float setVoltage(float);
         float getCurrent();
+        
 };
 
 #endif
