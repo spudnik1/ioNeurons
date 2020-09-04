@@ -28,32 +28,50 @@ MPU9250 imu;
 
 
 // --------------------------------------------------------------------------------
-char test; 
-// int16_t data = 0; 
+
+
+//---------------//
+// MOTOR TESTING //
+//---------------//
+
+// Sets the motor voltage to 0 V (DC = 50%), then prompts for new setpoint over serial
+
+// float input = 0.5;
+// int main(void){
+//     printf("started!\n");
+//     while(1){
+//         motor.setVoltage(input);
+//         printf("set!\n");
+//         scanf("%f",&input);
+//     }
+// }
+
+
+//---------------//
+//  IMU TESTING  //
+//---------------//
+
+// Reads the WHO_AM_I and prints to serial. 
+
+// char test; 
+// int main(void)
+// {  
+//     printf("Started!\n", test);
+//     test = imu.readByte(MPU9250_ADDRESS,WHO_AM_I_MPU9250);
+//     printf("%d\n", test);
+// }
+
+// Reads the gyroscope data
+int16_t gyroData[3]; 
 int main(void)
 {  
-    printf("Started!\n", test);
-    test = imu.readByte(MPU9250_ADDRESS,WHO_AM_I_MPU9250);
-    printf("%d\n", test);
-    // while(1){
-    //     printf("HERE!\n");
-    //     scanf("%d",&test);
-    //     led.write(!led.read());
-    // }
-//    imu.readGyroData(&data);
-//    printf("%d\n",data);
+    printf("Started!\n");
+    imu.initMPU9250();
+    imu.calibrateMPU9250(gyroBias,accelBias); 
+    while(1){
+        
+        imu.readGyroData(gyroData);
+        printf("%d, %d, %d\n", gyroData[0], gyroData[1], gyroData[2]);
+    }
 }
-
-
-// imu.writeByte();
-
-// MOTOR TESTING
-
-// float input = 0.65;
-    // printf("started!\n");
-    // while(1){
-    //     motor.setVoltage(input);
-    //     printf("set!\n");
-    //     scanf("%f",&input);
-    // }
 
