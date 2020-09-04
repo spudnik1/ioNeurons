@@ -1,16 +1,15 @@
 // Used to test functionality of the motor library
 #include <mbed.h>
 #include <RXNWheel.h>
-// #include <Custom_Serial.h>
+#include <Custom_Serial.h>
 #include <MPU9250.h>
-
-
 
 DigitalOut led(PD_4);
 
 Motor motor(PE_2,PE_5);
 
-MPU9250 imu;
+
+// 
 
 // ----- Want to implement this into Custom_Serial library, but not working. ------
 
@@ -28,32 +27,16 @@ MPU9250 imu;
 
 
 // --------------------------------------------------------------------------------
-char test; 
-// int16_t data = 0; 
+
 int main(void)
-{  
-    printf("Started!\n", test);
-    test = imu.readByte(MPU9250_ADDRESS,WHO_AM_I_MPU9250);
-    printf("%d\n", test);
-    // while(1){
-    //     printf("HERE!\n");
-    //     scanf("%d",&test);
-    //     led.write(!led.read());
-    // }
-//    imu.readGyroData(&data);
-//    printf("%d\n",data);
+{
+    // print to the console using the `serial_port` object.
+    while(1){
+        printf("Mbed OS version");
+    }
 }
 
 
-// imu.writeByte();
 
-// MOTOR TESTING
 
-// float input = 0.65;
-    // printf("started!\n");
-    // while(1){
-    //     motor.setVoltage(input);
-    //     printf("set!\n");
-    //     scanf("%f",&input);
-    // }
 
