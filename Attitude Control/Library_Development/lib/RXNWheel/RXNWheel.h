@@ -3,6 +3,10 @@
 
 #include <mbed.h>
 
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 #define BEMF_CONSTANT 0.19 // mV/(rev/min)
 #define ENCODER_REVOLUTION 8 // pulse/rev
 #define TORQUE_CONSTANT 1.81 // mNm/A
@@ -26,7 +30,7 @@ class Motor {
         Motor(PinName encoder_pin, PinName pwm_pin);
         void Pulse_Count();
         float getSpeed();
-        float setVoltage(float);
+        void setVoltage(float);
         float getCurrent();
         
 };
