@@ -49,7 +49,7 @@ float Motor::getSpeed(){
     }
 }
 
-float Motor::setVoltage(float voltage){
+void Motor::setVoltage(float voltage){
     float dC;
     dC = voltage;
     pwm.write(dC);
@@ -58,7 +58,7 @@ float Motor::setVoltage(float voltage){
 // Get the current draw of the motor 
 // float Motor::getCurrent(){
 //     // Find back EMF
-//     float bEMF = BEMF_CONSTANT*(getSpeed()*2*PI);
+//     float bEMF = BEMF_CONSTANT*(getSpeed()*2*M_PI);
 
 //     return((V-2*bEMF)/(2*WINDING_RESISTANCE))
     
