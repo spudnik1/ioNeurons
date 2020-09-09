@@ -62,16 +62,30 @@ MPU9250 imu;
 // }
 
 // Reads the gyroscope data
-int16_t gyroData[3]; 
+int16_t gyroData[3];
+float testReport[6];
+
+float num;
+char str[10];
+
+
 int main(void)
 {  
     printf("Started!\n");
-    imu.initMPU9250();
-    imu.calibrateMPU9250(gyroBias,accelBias); 
+    // motor.setVoltage(0.65);
+    imu.MPU9250SelfTest(testReport);
+    // imu.initMPU9250();
+    // imu.calibrateMPU9250(gyroBias,accelBias); 
+    
+    for(int i = 0; i < 6; i++){
+        printf("%d\n", (int)(testReport[i]*10000));
+    }
+    
     while(1){
         
-        imu.readGyroData(gyroData);
-        printf("%d, %d, %d\n", gyroData[0], gyroData[1], gyroData[2]);
+        // imu.readGyroData(gyroData);
+        // printf("%d, %d, %d\n", gyroData[0], gyroData[1], gyroData[2]);
+        // thread_sleep_for(500);
+        
     }
 }
-
