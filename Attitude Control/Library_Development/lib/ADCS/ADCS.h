@@ -13,15 +13,14 @@ extern Motor xMotor;
 // extern Motor xMotor;
 // extern Motor yMotor;
 
-// extern float r[3];
-// extern float v[3];
-// extern float quat[4];
-// extern float w[3];
-// extern float b[3];
+extern float r[3];
+extern float v[3];
+extern float quat[4];
+extern float w[3];
+extern float b[3];
 
-void attInit();
-// void attInit();
-// void setAttitude(float roll, float pitch, float yaw);
-// float* getAttitude();
+void attitudeInit();
+void setAttitude(float roll, float pitch, float yaw);
+void getAttitude();
 
 #endif
