@@ -1,9 +1,10 @@
 // Used to test functionality of the motor library
 #include <mbed.h>
 // #include <RXNWheel.h>
-// #include <Custom_Serial.h>
+#include <Custom_Serial.h>
 // #include <MPU9250.h>
 #include <ADCS.h>
+
 
 DigitalOut led(PD_4);
 
@@ -56,17 +57,23 @@ DigitalOut led(PD_4);
 //     printf("%d\n", test);
 // }
 
-// Reads the gyroscope data
-
-
-
-
-
-void attInit();
-// void setAttitude(float roll, float pitch, float yaw);
-// float* getAttitude();
+// Reads and integrates the gyroscope data
 
 int main(void)
-{  
- attInit();
+{
+    attitudeInit();
+    while(1){
+        for(int i = 0; i < 50; i++){
+            thread_sleep_for(10);
+            
+            getAttitude();
+        }
+        printf("\n\r"); 
+        printf("x speed is: "); printFloat(v[0]); printf(" deg/s\n\r");
+        printf("y speed is: "); printFloat(v[1]); printf(" deg/s\n\r");
+        printf("z speed is: "); printFloat(v[2]); printf(" deg/s\n\r");
+        printf("x position is: "); printFloat(r[0]); printf(" deg\n\r");
+        printf("y position is: "); printFloat(r[1]); printf(" deg\n\r");
+        printf("z position is: "); printFloat(r[2]); printf(" deg\n\r");
+    }
 }
