@@ -1,8 +1,6 @@
 // Used to test functionality of the motor library
 #include <mbed.h>
-// #include <RXNWheel.h>
 #include <Custom_Serial.h>
-// #include <MPU9250.h>
 #include <ADCS.h>
 
 
