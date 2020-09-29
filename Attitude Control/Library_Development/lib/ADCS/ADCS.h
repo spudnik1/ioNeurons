@@ -5,6 +5,7 @@
 #include <mbed.h>
 #include <RXNWheel.h>
 #include <MPU9250.h>
+#include <Custom_Serial.h>
 
 extern MPU9250 imu;
 extern Motor xMotor;

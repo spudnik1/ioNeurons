@@ -1,5 +1,5 @@
 #include <ADCS.h>
-#include <Custom_Serial.h>
+
 
 MPU9250 imu;
 Motor xMotor(PE_2,PE_5);
@@ -80,11 +80,10 @@ void getAttitude(){
     // Get ADC values from gyro data register
     imu.readGyroData(gyroCount); 
     
-    // Conver ADC values to angular speed
-    // !!!look at this again, its a signed int!!!
-    w[0] = gyroCount[0]*gRes;
-    w[1] = gyroCount[1]*gRes;
-    w[2] = gyroCount[2]*gRes;
+    // Convert ADC values to angular speed
+    w[0] = (float)gyroCount[0]*gRes - gyroBias[0];
+    w[1] = (float)gyroCount[1]*gRes - gyroBias[1];
+    w[2] = (float)gyroCount[2]*gRes - gyroBias[2];
 
     // Determine integral in the case that timer has started
     if (integralTimer.read_ms() > 0){
