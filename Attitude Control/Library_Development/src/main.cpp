@@ -67,11 +67,11 @@ int main(void)
             getAttitude();
         }
         printf("\n\r"); 
-        printf("x speed is: "); printFloat(v[0]); printf(" deg/s\n\r");
-        printf("y speed is: "); printFloat(v[1]); printf(" deg/s\n\r");
-        printf("z speed is: "); printFloat(v[2]); printf(" deg/s\n\r");
-        printf("x position is: "); printFloat(r[0]); printf(" deg\n\r");
-        printf("y position is: "); printFloat(r[1]); printf(" deg\n\r");
-        printf("z position is: "); printFloat(r[2]); printf(" deg\n\r");
+        printf("x speed is: "); printFloat(w[0]); printf(" deg/s\n\r");
+        printf("y speed is: "); printFloat(w[1]); printf(" deg/s\n\r");
+        printf("z speed is: "); printFloat(w[2]); printf(" deg/s\n\r");
+        printf("x position is: "); printFloat(theta[0]); printf(" deg\n\r");
+        printf("y position is: "); printFloat(theta[1]); printf(" deg\n\r");
+        printf("z position is: "); printFloat(theta[2]); printf(" deg\n\r");
     }
 }

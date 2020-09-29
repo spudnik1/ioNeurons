@@ -9,16 +9,17 @@ Timer integralTimer;
 
 int integralCount;
 
-float r[3] = {0,0,0};
+float r[3];
 float v[3];
 float quat[4];
+float theta[3] = {0,0,0};
 float w[3];
 float b[3];
 
-float prevV[3];
+float prevW[3];
 
 void attitudeInit(){
-//---------------- same process as Kris Winer's main.cpp file ----------------- //
+//---------------- same process as Kris Winer's example code ----------------- //
     uint8_t whoami = imu.readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);  // Read WHO_AM_I register for MPU-9250
     printf("I AM 0x%x\n\r", whoami); printf("I SHOULD BE 0x71\n\r");
   
@@ -70,6 +71,9 @@ void setAttitude(float roll, float pitch, float yaw){
 
 }
 
+void getDrift(){
+
+}
 // 
 void getAttitude(){
     
@@ -78,9 +82,9 @@ void getAttitude(){
     
     // Conver ADC values to angular speed
     // !!!look at this again, its a signed int!!!
-    v[0] = gyroCount[0]*gRes;
-    v[1] = gyroCount[1]*gRes;
-    v[2] = gyroCount[2]*gRes;
+    w[0] = gyroCount[0]*gRes;
+    w[1] = gyroCount[1]*gRes;
+    w[2] = gyroCount[2]*gRes;
 
     // Determine integral in the case that timer has started
     if (integralTimer.read_ms() > 0){
@@ -88,9 +92,9 @@ void getAttitude(){
         integralTimer.stop();
 
         // Integrate velocity curve using midpoint rule 
-        r[0]=((v[0]+prevV[0])/2)*(integralTimer.read_ms()/1000.0f)+r[0];
-        r[1]=((v[1]+prevV[1])/2)*(integralTimer.read_ms()/1000.0f)+r[1];
-        r[2]=((v[2]+prevV[2])/2)*(integralTimer.read_ms()/1000.0f)+r[2];
+        theta[0]=((w[0]+prevW[0])/2)*(integralTimer.read_ms()/1000.0f)+theta[0];
+        theta[1]=((w[1]+prevW[1])/2)*(integralTimer.read_ms()/1000.0f)+theta[1];
+        theta[2]=((w[2]+prevW[2])/2)*(integralTimer.read_ms()/1000.0f)+theta[2];
 
         integralTimer.reset();
         
@@ -99,7 +103,8 @@ void getAttitude(){
     integralTimer.start();
 
     // Store past angular speed
-    prevV[0] = v[0];
-    prevV[1] = v[1];
-    prevV[2] = v[2];
+    prevW[0] = w[0];
+    prevW[1] = w[1];
+    prevW[2] = w[2];
 }
+

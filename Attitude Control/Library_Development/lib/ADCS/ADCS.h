@@ -17,11 +17,14 @@ extern Motor xMotor;
 extern float r[3];
 extern float v[3];
 extern float quat[4];
+extern float theta[3];
 extern float w[3];
 extern float b[3];
 
 void attitudeInit();
 void setAttitude(float roll, float pitch, float yaw);
+void getDrift();
 void getAttitude();
+
 
 #endif
