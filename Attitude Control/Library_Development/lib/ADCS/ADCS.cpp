@@ -1,4 +1,5 @@
 #include <ADCS.h>
+#include <Attitude_Model.h>
 
 
 MPU9250 imu;
