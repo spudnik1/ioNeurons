@@ -3,7 +3,6 @@
 #include <Custom_Serial.h>
 #include <ADCS.h>
 
-
 DigitalOut led(PD_4);
 
 // ----- Want to implement this into Custom_Serial library, but not working. ------

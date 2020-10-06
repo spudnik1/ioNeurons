@@ -14,4 +14,8 @@ extern float inertia[3][3];
 
 void propAttitude(float* theta, float* w, float dt);
 
+void cross(float* m1, float* m2, int* m1Dim, int m2Dim);
+
+
 #endif
+

@@ -30,3 +30,10 @@ void propAttitude(float* theta, float* w, float dt){
 
 }
 
+/* m1 and m2 are pointers to the arrays where m1Dim and m2Dim are pointers to arrays which specify 
+ * the dimensions of m1 and m2. m1Dim and m2Dim should be in the format of {rows, columns} */
+void cross(float* m1, float* m2, int* m1Dim, int* m2Dim){
+    
+
+}
+
