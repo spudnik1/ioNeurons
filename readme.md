@@ -45,8 +45,4 @@ lib
         IGRF (9)
             
             - Magentic field model
-
-
---- Other ---
-
-Custom Serial
+    Custom Serial
