@@ -1,3 +1,0 @@
-[submodule "Attitude Control/Library_Development/lib/eigen"]
-	path = Attitude Control/Library_Development/lib/eigen
-	url = https://gitlab.com/libeigen/eigen.git
