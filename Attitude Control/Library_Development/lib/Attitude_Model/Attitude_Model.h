@@ -1,6 +1,7 @@
 #ifndef ATTMOD_H
 #define ATTMOD_H
 
+
 // Variables found the ADCS.h
 extern float r[3];
 extern float v[3];
@@ -10,11 +11,10 @@ extern float w[3];
 extern float b[3];
 
 // Variables found the Attitude_Model.h
-extern float inertia[3][3];
 
 void propAttitude(float* theta, float* w, float dt);
 
-void cross(float* m1, float* m2, int* m1Dim, int m2Dim);
+void multiply(float* m1, float* m2);
 
 
 #endif

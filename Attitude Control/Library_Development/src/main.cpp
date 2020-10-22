@@ -2,6 +2,7 @@
 #include <mbed.h>
 #include <Custom_Serial.h>
 #include <ADCS.h>
+#include <Attitude_Model.h>
 
 DigitalOut led(PD_4);
 
@@ -29,15 +30,15 @@ DigitalOut led(PD_4);
 
 // Sets the motor voltage to 0 V (DC = 50%), then prompts for new setpoint over serial
 
-// float input = 0.5;
-// int main(void){
-//     printf("started!\n");
-//     while(1){
-//         xMotor.setVoltage(input);
-//         printf("set!\n");
-//         scanf("%f",&input);
-//     }
-// }
+float input = 0.5;
+int main(void){
+    printf("started!\n");
+    while(1){
+        xMotor.setVoltage(input);
+        printf("set!\n");
+        scanf("%f",&input);
+    }
+}
 
 
 //---------------//
@@ -56,21 +57,29 @@ DigitalOut led(PD_4);
 
 // Reads and integrates the gyroscope data
 
-int main(void)
-{
-    attitudeInit();
-    while(1){
-        for(int i = 0; i < 50; i++){
-            thread_sleep_for(10);
+// int main(void)
+// {
+//     attitudeInit();
+//     while(1){
+//         for(int i = 0; i < 50; i++){
+//             thread_sleep_for(10);
             
-            getAttitude();
-        }
-        printf("\n\r"); 
-        printf("x speed is: "); printFloat(w[0]); printf(" deg/s\n\r");
-        printf("y speed is: "); printFloat(w[1]); printf(" deg/s\n\r");
-        printf("z speed is: "); printFloat(w[2]); printf(" deg/s\n\r");
-        printf("x position is: "); printFloat(theta[0]); printf(" deg\n\r");
-        printf("y position is: "); printFloat(theta[1]); printf(" deg\n\r");
-        printf("z position is: "); printFloat(theta[2]); printf(" deg\n\r");
-    }
-}
+//             getAttitude();
+//         }
+//         printf("\n\r"); 
+//         printf("x speed is: "); printFloat(w[0]); printf(" deg/s\n\r");
+//         printf("y speed is: "); printFloat(w[1]); printf(" deg/s\n\r");
+//         printf("z speed is: "); printFloat(w[2]); printf(" deg/s\n\r");
+//         printf("x position is: "); printFloat(theta[0]); printf(" deg\n\r");
+//         printf("y position is: "); printFloat(theta[1]); printf(" deg\n\r");
+//         printf("z position is: "); printFloat(theta[2]); printf(" deg\n\r");
+//     }
+// }
+
+//--------------------------//
+//  Attitude Model TESTING  //
+//--------------------------//
+// int main(void)
+// {
+
+// }
