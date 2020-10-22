@@ -23,6 +23,6 @@ lib
             - Reciever for TLE files
         SGP4
             - TLE Propagator
-        IGRF (9)           
+        IGRF         
             - Magentic field model
     Custom Serial
